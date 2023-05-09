@@ -33,7 +33,7 @@ class ExamRankingController(http.Controller):
 # JavaScript code for displaying the exam ranking per student
 
 odoo.define('exams_ranking_system.exam_ranking_controller', function (require) {
-    'use strict';
+    'use strict',
     var core = require('web.core');
     var Widget = require('web.Widget');
     var data = require('web.data');
@@ -46,7 +46,7 @@ odoo.define('exams_ranking_system.exam_ranking_controller', function (require) {
             'change select[name="sort_by"]': '_onSortByChange',
             'change select[name="order"]': '_onOrderChange',
         },
-        init: function (parent, exams, exam_results) {
+        init: function ("parent", "exams", "exam_results") {
             this._super(parent);
             this.exams = exams;
             this.exam_results = exam_results;
