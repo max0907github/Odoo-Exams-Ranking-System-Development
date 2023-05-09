@@ -1,0 +1,101 @@
+#Code for creating the Odoo module 'exams_ranking_system'
+
+from odoo import models, fields, api
+
+class Exam(models.Model):
+    _name = 'exams_ranking_system.exam'
+    name = fields.Char(string='Name', required=True)
+    date = fields.Date(string='Date', required=True)
+    total_marks = fields.Float(string='Total Marks', required=True)
+
+class Student(models.Model):
+    _name = 'exams_ranking_system.student'
+    first_name = fields.Char(string='First Name', required=True)
+    last_name = fields.Char(string='Last Name', required=True)
+    email = fields.Char(string='Email', required=True)
+
+class ExamResult(models.Model):
+    _name = 'exams_ranking_system.exam_result'
+    student_id = fields.Many2one('exams_ranking_system.student', string='Student', required=True)
+    exam_id = fields.Many2one('exams_ranking_system.exam', string='Exam', required=True)
+    marks_obtained = fields.Float(string='Marks Obtained', required=True)
+
+class ExamRankingController(http.Controller):
+    @http.route('/exams_ranking_system/ranking/<model("exams_ranking_system.exam"):exam>', auth='user')
+    def show_exam_ranking(self, exam, **kwargs):
+        exam_results = request.env['exams_ranking_system.exam_result'].search([('exam_id', '=', exam.id)])
+        exam_results_sorted = exam_results.sorted(key=lambda r: r.marks_obtained, reverse=True)
+        return request.render('exams_ranking_system.exam_ranking_template', {
+            'exam': exam,
+            'exam_results': exam_results_sorted
+        })
+
+# JavaScript code for displaying the exam ranking per student
+
+odoo.define('exams_ranking_system.exam_ranking_controller', function (require) {
+    'use strict';
+    var core = require('web.core');
+    var Widget = require('web.Widget');
+    var data = require('web.data');
+    var framework = require('web.framework');
+
+    var ExamRankingWidget = Widget.extend({
+        template: 'exams_ranking_system.exam_ranking_template',
+        events: {
+            'change select[name="exam_id"]': '_onExamChange',
+            'change select[name="sort_by"]': '_onSortByChange',
+            'change select[name="order"]': '_onOrderChange',
+        },
+        init: function (parent, exams, exam_results) {
+            this._super(parent);
+            this.exams = exams;
+            this.exam_results = exam_results;
+            this.exam_id = exams[0].id;
+            this.sort_by = 'marks_obtained';
+            this.order = 'desc';
+        },
+        start: function () {
+            this._renderData();
+            return this._super();
+        },
+        _renderData: function () {
+            var self = this;
+            var exam = _.findWhere(this.exams, {id: parseInt(this.exam_id)});
+            var exam_results = _.where(this.exam_results, {exam_id: parseInt(this.exam_id)});
+            exam_results = _.sortBy(exam_results, this.sort_by);
+            if (this.order === 'desc') {
+                exam_results.reverse();
+            }
+            this.$('.oe_exam_name').text(exam.name);
+            this.$('.oe_exam_date').text(exam.date);
+            this.$('.oe_exam_total_marks').text(exam.total_marks);
+            this.$('.oe_exam_results').empty();
+            _.each(exam_results, function (result) {
+                var student = _.findWhere(self.students, {id: result.student_id[0]});
+                var row = $('<tr>').append(
+                    $('<td>').text(student.first_name),
+                    $('<td>').text(student.last_name),
+                    $('<td>').text(student.email),
+                    $('<td>').text(result.marks_obtained)
+                );
+                self.$('.oe_exam_results').append(row);
+            });
+        },
+        _onExamChange: function (event) {
+            this.exam_id = parseInt($(event.currentTarget).val());
+            this._renderData();
+        },
+        _onSortByChange: function (event) {
+            this.sort_by = $(event.currentTarget).val();
+            this._renderData();
+        },
+        _onOrderChange: function (event) {
+            this.order = $(event.currentTarget).val();
+            this._renderData();
+        },
+    });
+
+    core.action_registry.add('exam_ranking_widget', ExamRankingWidget);
+
+    return ExamRankingWidget;
+});
