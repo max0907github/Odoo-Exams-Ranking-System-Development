@@ -1,6 +1,6 @@
-#Code for creating the Odoo module 'exams_ranking_system'
+#CODES FOR CREATING 'ODOO EXAM_RANKING_SYSTEM'
 
-from odoo import models, fields, api
+#initializing the fields
 
 class Exam(models.Model):
     _name = 'exams_ranking_system.exam'
