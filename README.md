@@ -1,71 +1,77 @@
-# Setting up and Using the Odoo Module 'exams_ranking_system'
+# Exam Ranking System
 
-THE FOLLOWING ARE DETAILED INSTRUCTIONS ON INSTALLATION AND USAGE OF ODOO EXAM RANKING SYSTEM.
+The **Exam Ranking System** is a custom Odoo module designed to simplify the management of exams, student records, and results. This module automates the ranking of students based on their exam scores, providing educational institutions with an efficient tool for managing academic performance.
 
-The 'exams_ranking_system' is a custom Odoo module for managing exams, students, and their results.
-This module provides a ranking system for exams taken by students.
-This README file provides detailed instructions on how to set up and use this module.
-Before installing and using the 'exams_ranking_system' module, you should have the following:
-A running instance of Odoo.
-Access to the Odoo administrator account with permission to install modules.
+## Prerequisites
 
-#INSTALLATION OF THE SYSTEM
+Before installing and using the `exams_ranking_system` module, ensure you have:
+- A running instance of Odoo.
+- Administrator access with permission to install and manage modules.
 
-To install the 'exams_ranking_system' module, follow the steps below:
-Download the sample code provided in this Repository.
-Copy the sample code to a new file named _manifest_.py and save it in a directory named exams_ranking_system.
-Compress the exams_ranking_system directory to a ZIP file.
-Log in to your Odoo instance as an administrator.
-Go to the Apps menu and select 'Update Apps List'.
-Click the 'Upload App' button and select the ZIP file you created in step 3.
-Once the app is uploaded, you should see the 'exams_ranking_system' module in the list of available apps.
-Click the 'Install' button next to the 'exams_ranking_system' module to install it.
-After installation, you should be able to see the 'Exams Ranking System' menu in the main menu of Odoo.
+## Installation
 
-#USAGE OF THE SYSTEM
+Follow these steps to install the **Exam Ranking System**:
 
-The 'exams_ranking_system' module provides three models:
-Exam.
-Student.
-Exam_Result.
+1. **Download the Sample Code**:
+   - Download the code from this repository.
 
-These models are used to manage exams, students, and their results.
-Additionally, the module provides a JavaScript widget for displaying the exam ranking per student.
+2. **Prepare the Module Directory**:
+   - Copy the sample code to a new file named `__manifest__.py`.
+   - Save it in a directory named `exams_ranking_system`.
 
-#CREATING THE EXAM
+3. **Compress the Directory**:
+   - Compress the `exams_ranking_system` directory into a ZIP file.
 
-following steps should be followed:
-Go to the 'Exams Ranking System' menu and select 'Exams'.
-Click the 'Create' button to create a new exam.
-Enter the exam name, date, and total marks of the subjects.
-Click the 'Save' button to save the new exam.
+4. **Upload to Odoo**:
+   - Log in to your Odoo instance as an administrator.
+   - Go to the **Apps** menu, and select **Update Apps List**.
+   - Click **Upload App** and select the ZIP file created in Step 3.
 
-#CREATING THE STUDENT
+5. **Install the Module**:
+   - Locate the `exams_ranking_system` module in the list of available apps.
+   - Click the **Install** button next to the module.
 
-following steps should be followed:
-Go to the 'Exams Ranking System' menu and select 'Students'.
-Click the 'Create' button to create a new student.
-Enter the student's first name, last name, and email.
-Click the 'Save' button to save the new student.
-Recording Exam Results
+6. **Verify Installation**:
+   - Once installed, the **Exams Ranking System** menu will appear in the Odoo main menu.
 
-#RECORDING THE EXAM RESULTS
+## Usage
 
-following steps should be followed:
-Go to the 'Exams Ranking System' menu and select 'Exam Results'.
-Click the 'Create' button to create a new exam result.
-Select the student who took the exam from the 'Student' field.
-Select the exam taken by the student from the 'Exam' field.
-Enter the marks obtained by the student in the 'Marks Obtained' field.
-Click the 'Save' button to save the new exam result.
+The `exams_ranking_system` module provides three models: **Exam**, **Student**, and **Exam Result**, as well as a JavaScript widget to display the ranking of students based on exam results.
 
-#DISPLAYING EXAM RANKING PER STUDENT
+### 1. Creating an Exam
 
-following steps should be followed:
-Go to the 'Exams Ranking System' menu and select 'Exams'.
-Click on the exam for which you want to display the ranking.
-Click the 'Action' button and select 'Display Exam Ranking' from the dropdown menu.
-The exam ranking per student will be displayed in a table format.
+1. Go to the **Exams Ranking System** menu and select **Exams**.
+2. Click **Create** to set up a new exam.
+3. Enter details such as **Exam Name**, **Date**, and **Total Marks**.
+4. Click **Save** to save the exam.
 
-#FINAL COMMENT AND RECOMMENDATION ON THE ODOO EXAM RANKING SYSTEM
-The 'exams_ranking_system' module provides an easy-to-use system for managing exams, students, and their results
+### 2. Adding Students
+
+1. Go to the **Exams Ranking System** menu and select **Students**.
+2. Click **Create** to add a new student.
+3. Enter the **First Name**, **Last Name**, and **Email** of the student.
+4. Click **Save** to save the student’s information.
+
+### 3. Recording Exam Results
+
+1. Go to the **Exams Ranking System** menu and select **Exam Results**.
+2. Click **Create** to enter results for a student.
+3. In the **Student** field, select the student who took the exam.
+4. In the **Exam** field, select the exam taken by the student.
+5. Enter the **Marks Obtained** by the student.
+6. Click **Save** to record the result.
+
+### 4. Displaying Exam Ranking
+
+1. Go to the **Exams Ranking System** menu and select **Exams**.
+2. Choose the specific exam for which you wish to display the ranking.
+3. Click the **Action** button, then select **Display Exam Ranking**.
+4. A table will appear, displaying the ranking of students based on their scores.
+
+## Final Remarks
+
+The **Exam Ranking System** module is a user-friendly solution for academic institutions to manage exams, student records, and rankings efficiently. By automating the ranking process, this module reduces administrative workload and minimizes errors, ensuring accurate, data-driven insights into student performance.
+
+
+
+**This README offers a clear, step-by-step guide for installing, setting up, and using the module, making it easier for users to implement and benefit from its functionality.**
